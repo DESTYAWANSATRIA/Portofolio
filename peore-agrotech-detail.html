@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Detail: Peore AgroTech — Destyawan S.N</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@400;600;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #020b18;
+      --navy2: #041425;
+      --blue-dark: #062a4e;
+      --blue-mid: #0a5c9e;
+      --blue-bright: #1a9eff;
+      --cyan: #00d4ff;
+      --cyan-glow: rgba(0,212,255,0.18);
+      --text: #d6eeff;
+      --text-muted: #6a9bbf;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--blue-bright); border-radius: 2px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(2,11,24,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(26,158,255,0.12);
+    }
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 4rem; max-width: 900px; margin: 0 auto; }
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem; letter-spacing: 3px; color: var(--cyan);
+      text-transform: uppercase; margin-bottom: .6rem;
+    }
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.8rem,4vw,3rem); font-weight: 700;
+      color: var(--white); margin-bottom: 1rem;
+    }
+    .section-line {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      margin-bottom: 3rem;
+    }
+
+    /* ── PROJECT DETAIL STYLES ── */
+    .project-detail-header {
+      padding-top: 4rem; /* to account for fixed nav */
+    }
+    .project-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--blue-bright);
+      margin-bottom: 2rem;
+    }
+    .project-tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-bottom: 3rem;
+      padding-left: 0;
+    }
+    .tech-tag {
+      font-size: .75rem; font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan); background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.2);
+      padding: .3rem .7rem; border-radius: 3px;
+    }
+    .project-content h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-top: 3rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid rgba(26,158,255,0.15);
+    }
+    .project-content p, .project-content li {
+      font-size: .95rem;
+      line-height: 1.9;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+    .project-content ul, .project-content ol {
+      padding-left: 1.5rem;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .project-content strong {
+      color: var(--cyan);
+      font-weight: 600;
+    }
+    .media-placeholder {
+      border: 1px solid var(--blue-dark);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 1.5rem;
+      background: rgba(6,42,78,0.1);
+    }
+    .media-placeholder p {
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      margin: 0;
+    }
+    .media-placeholder img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin: 0 auto 1rem auto;
+      display: block;
+      border: 1px solid rgba(26,158,255,0.2);
+    }
+    .prompt-code-block {
+      background: rgba(4, 20, 37, 0.9);
+      border: 1px solid var(--blue-dark);
+      border-radius: 6px;
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      margin-top: 1.5rem;
+    }
+    .prompt-code-block pre, .prompt-code-block code {
+      margin: 0; padding: 0; background: none;
+      font-family: inherit; color: inherit;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 4rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: .9rem;
+      transition: transform .2s;
+    }
+    .back-link:hover {
+      transform: translateX(-4px);
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: .75rem 2rem;
+      background: linear-gradient(135deg, var(--blue-bright), var(--cyan));
+      color: var(--navy); font-weight: 700; text-decoration: none;
+      font-size: .85rem; letter-spacing: 1px;
+      border-radius: 3px;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 0 24px rgba(0,212,255,0.3);
+      margin-top: 1.5rem;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,212,255,0.5);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2rem;
+      border-top: 1px solid rgba(26,158,255,0.08);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem; color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .project-detail-header { padding-top: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">DSN</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#skills">Skills</a></li>
+    <li><a href="index.html#certificates">Certificates</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="project-detail">
+  <div class="project-detail-header">
+    <p class="section-tag">// project case study</p>
+    <h2 class="section-title">Peore AgroTech: AI-Driven B2B Orchestration System</h2>
+    <p class="project-role">Peran: AI Solutions Architect / Backend Automation Engineer</p>
+    <div class="project-tech-stack">
+      <span class="tech-tag">Gemini 2.5 Flash</span>
+      <span class="tech-tag">n8n (Workflow Automation)</span>
+      <span class="tech-tag">Telegram API</span>
+      <span class="tech-tag">Notion API (CRM)</span>
+      <span class="tech-tag">JavaScript / Regex</span>
+    </div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="project-content">
+    <p>Merancang sistem orkestrasi <em>Customer Support & Sales</em> otonom yang mengintegrasikan model Multimodal AI (Generative Vision & Text) dengan alur kerja bisnis secara <em>real-time</em>. Sistem ini mendemonstrasikan penyelesaian masalah bisnis dunia nyata (<em>real-world business value</em>) melalui klasifikasi intensi pelanggan, diagnosis penyakit tanaman otomatis, pembuatan E-Invoice, hingga integrasi CRM.</p>
+
+    <h3>🛑 Tantangan Bisnis (The Problem)</h3>
+    <p>Dalam industri agrikultur B2B, layanan pelanggan dan penjualan menghadapi tiga hambatan utama (<em>bottleneck</em>):</p>
+    <ul>
+      <li><strong>Keterbatasan Tenaga Ahli (Agronom):</strong> Petani sering kali mengirimkan foto tanaman yang sakit dan membutuhkan jawaban instan. Menunggu diagnosis manual dari ahli agronomi memakan waktu dan berisiko gagal panen.</li>
+      <li><strong>Pembuatan Penawaran yang Lambat:</strong> Proses menghitung diskon dan mencetak struk penawaran harga (Quotation) untuk pupuk/pestisida masih manual.</li>
+      <li><strong>Manajemen Komplain Tercecer:</strong> Keluhan pelanggan melalui pesan singkat sering kali tidak tercatat dalam basis data perusahaan, menyulitkan tim <em>Customer Service</em> (CS) untuk menindaklanjutinya.</li>
+    </ul>
+
+    <h3>💡 Solusi AI Orchestration (The Solution)</h3>
+    <p>Membangun <strong>Peore AgroTech Bot</strong> berbasis Telegram yang bertindak sebagai "Satpam Cerdas", Ahli Agronomi, Kasir, dan Resepsionis CS secara serentak. Sistem ini ditenagai oleh <em>workflow automation</em> (n8n) dan <em>Large Language Model</em> (LLM) yang mampu memilah kelakuan pelanggan tanpa format kaku, mengekstrak data dinamis, dan mengeksekusi sistem pihak ketiga.</p>
+
+    <h3>⚙️ Arsitektur Sistem & Fitur Utama</h3>
+    <ol>
+      <li><strong>Smart Intent Classification (AI Router)</strong><p>Pesan pengguna—baik berupa teks tunggal maupun teks beserta lampiran foto—dicegat di node pertama. LLM bertindak sebagai <em>Dynamic Router</em> yang mengklasifikasikan niat pengguna ke dalam 3 jalur pasti: <code>DIAGNOSIS</code>, <code>QUOTATION</code>, atau <code>COMPLAINT</code>, menggunakan <em>Prompt Engineering</em> berbasis logika.</p></li>
+      <li><strong>Multimodal Computer Vision untuk Diagnosis</strong><p>Jika pengguna mengirimkan foto daun berpenyakit, sistem akan mengunduh ID File dari Telegram API dan mengirimkannya ke Google Gemini Vision. AI menganalisis kerusakan daun (contoh: serangan hama ulat) dan merespons dengan diagnosis serta rekomendasi produk pestisida spesifik di bawah 2.000 karakter agar kompatibel dengan limitasi Telegram.</p></li>
+      <li><strong>Automated Quoting System (E-Invoice Digital)</strong><p>Jika terdeteksi sebagai niat pembelian, alur dialihkan ke sistem kalkulasi Node JS. Sistem menghitung diskon dan menghasilkan E-Invoice dinamis berformat <em>Markdown</em> yang terlihat profesional langsung di layar percakapan Telegram.</p></li>
+      <li><strong>CRM Integration & Human Handoff</strong><p>Untuk jalur komplain, sistem tidak membalas dengan <em>template</em> robot. Keluhan pelanggan langsung diteruskan sebagai <strong>Alert</strong> ke Tim CS, sekaligus mengeksekusi Notion API untuk mencatat ID, Nama, dan Isi Komplain ke dalam <em>database</em> tabel (CRM) perusahaan secara persisten.</p></li>
+      <li><strong>Data Sanitization (Pencucian Markdown via JavaScript)</strong><p>Mengatasi limitasi "Legacy Parse Mode" pada Telegram API, saya menyuntikkan <em>Code Node</em> (JavaScript) di tengah <em>workflow</em>. Node ini menggunakan <em>Regular Expression</em> (Regex) untuk menyucikan <em>output</em> AI dari karakter Markdown (<code>**</code>, <code>_</code>, <code>#</code>) yang tidak berpasangan, mencegah <em>crash/error</em> sistem pengiriman pesan.</p></li>
+    </ol>
+
+    <h3>🗺️ Visualisasi Alur Sistem (n8n Spaghetti Workflow)</h3>
+    <p>Di bawah ini adalah <em>blueprint</em> orkestrasi yang memisahkan logika ke dalam tiga cabang eksekusi paralel.</p>
+    <div class="media-placeholder">
+      <img src="images/flown8n_agrotech.png" alt="Visualisasi alur kerja n8n 3 Cabang: Diagnosis, Invoice, dan Komplain">
+      <p style="font-size: 0.8rem; margin-top: 1rem;">Keterangan: Arsitektur Switch Routing n8n yang menghubungkan Telegram Trigger, Intent Classifier, Gemini Image Analyzer, Code Calculator, dan Notion Database Integration.</p>
+    </div>
+
+    <h3>📝 Highlight Code & Prompt Engineering</h3>
+    <p>Ketangguhan sistem ini terletak pada fleksibilitas membaca pesan (meski hanya foto tanpa teks) dan kemampuan membersihkan data sebelum dikirim kembali ke <em>user</em>.</p>
+    
+    <div class="prompt-code-block">
+<pre><code>// 1. AI INTENT CLASSIFIER PROMPT (Penanganan Gambar tanpa Teks)
+Analyze the input and classify the intent into exactly one of these categories: 'DIAGNOSIS', 'QUOTATION', or 'COMPLAINT'. 
+
+Input: {{ $('Telegram Trigger').item.json.message.text || $('Telegram Trigger').item.json.message.caption || '[User mengirimkan gambar tanpa teks]' }}
+
+
+// 2. DATA SANITIZATION (JavaScript Node)
+// Mencegah Telegram API Error (Bad Request: Can't parse entities)
+for (const item of $input.all()) {
+  let rawText = item.json.content?.parts[0]?.text || "";
+
+  // Membersihkan tanda Markdown menggunakan Regex
+  let cleanText = rawText
+    .replace(/\*\*/g, '') // Menghapus bintang ganda (Bold)
+    .replace(/\*/g, '')   // Menghapus bintang tunggal (Italic)
+    .replace(/__/g, '')   // Menghapus garis bawah ganda
+    .replace(/_/g, '')    // Menghapus garis bawah tunggal
+    .replace(/^#+\s/gm, ''); // Menghapus format Header
+
+  item.json.teks_bersih = cleanText;
+}
+return $input.all();
+</code></pre>
+    </div>
+
+    <h3>🎥 Proof of Work (Skenario Testing)</h3>
+    <p>Sistem ini telah lulus Uji QA dengan hasil sempurna pada ketiga rute (*Routing*):</p>
+    <div class="media-placeholder">
+      <video width="100%" controls muted autoplay loop style="border-radius: 6px; border: 1px solid rgba(26,158,255,0.2); margin: 0 auto 1rem auto; display: block;">
+        <source src="images/demo_telegram_bot.mp4" type="video/mp4">
+        Maaf, browser Anda tidak mendukung pemutaran video tersemat.
+      </video>
+      <p style="font-size: 0.8rem; margin-top: 1rem;">1. Bot mendiagnosis Daun Mangga berlubang (Chewing Pest).<br>2. Bot menerbitkan Quotation Rp 6.750.000 untuk Pupuk NutriGrow.<br>3. Bot mencatat komplain pupuk sobek ke Notion HRD.</p>
+    </div>
+
+    <a href="index.html#projects" class="back-link">← Kembali ke Daftar Project</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Destyawan S.N — Mengorkestrasi AI dan Rekayasa Perangkat Lunak untuk Solusi Industri.
+</footer>
+
+<link href="https://18rq2o-n8n.bocindonesia.com/chat/style.css" rel="stylesheet" />
+<script type="module">
+  import { createChat } from 'https://18rq2o-n8n.bocindonesia.com/chat/chat.bundle.js';
+
+  createChat({
+    webhookUrl: 'https://18rq2o-n8n.bocindonesia.com/webhook/7e8e304d-3de8-4a25-8a71-fa47a617f8b8/chat',
+    initialMessages: [
+      'Halo! 👋 Saya adalah AI Asisten Destyawan.',
+      'Ada yang ingin Anda ketahui tentang proyek Peore AgroTech ini?'
+    ],
+    i18n: {
+      en: {
+        chatBox: {
+          title: 'Tanya Desta AI',
+          subtitle: 'Tanya seputar proyek ini',
+        },
+      },
+    },
+    theme: { colors: { primary: '#00d4ff', accent: '#1a9eff', textLight: '#ffffff' } },
+    chatWindow: {
+      position: 'right',
+    },
+    chatBubble: {
+      position: 'bottom-right',
+      customIcon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8" /><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 2v2" /><path d="M9 2v2" /></svg>`,
+    },
+  });
+</script>
+
+</body>
+</html>

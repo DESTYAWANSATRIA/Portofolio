@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Detail: Nutri-Grade AI System — Destyawan S.N</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@400;600;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #020b18;
+      --navy2: #041425;
+      --blue-dark: #062a4e;
+      --blue-mid: #0a5c9e;
+      --blue-bright: #1a9eff;
+      --cyan: #00d4ff;
+      --cyan-glow: rgba(0,212,255,0.18);
+      --text: #d6eeff;
+      --text-muted: #6a9bbf;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--blue-bright); border-radius: 2px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(2,11,24,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(26,158,255,0.12);
+    }
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 4rem; max-width: 900px; margin: 0 auto; }
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem; letter-spacing: 3px; color: var(--cyan);
+      text-transform: uppercase; margin-bottom: .6rem;
+    }
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.8rem,4vw,3rem); font-weight: 700;
+      color: var(--white); margin-bottom: 1rem;
+    }
+    .section-line {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      margin-bottom: 3rem;
+    }
+
+    /* ── PROJECT DETAIL STYLES ── */
+    .project-detail-header {
+      padding-top: 4rem;
+    }
+    .project-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--blue-bright);
+      margin-bottom: 2rem;
+    }
+    .project-tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-bottom: 3rem;
+      padding-left: 0;
+    }
+    .tech-tag {
+      font-size: .75rem; font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan); background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.2);
+      padding: .3rem .7rem; border-radius: 3px;
+    }
+    .project-content h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-top: 3rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid rgba(26,158,255,0.15);
+    }
+    .project-content p, .project-content li {
+      font-size: .95rem;
+      line-height: 1.9;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+    .project-content ul, .project-content ol {
+      padding-left: 1.5rem;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .project-content strong {
+      color: var(--cyan);
+      font-weight: 600;
+    }
+    .media-placeholder {
+      border: 1px solid var(--blue-dark);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 1.5rem;
+      background: rgba(6,42,78,0.1);
+    }
+    .media-placeholder p {
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      margin: 0;
+    }
+    .media-placeholder img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin: 0 auto 1rem auto;
+      border: 1px solid rgba(26,158,255,0.2);
+      display: block;
+    }
+    .prompt-code-block {
+      background: rgba(4, 20, 37, 0.9);
+      border: 1px solid var(--blue-dark);
+      border-radius: 6px;
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      margin-top: 1.5rem;
+    }
+    .prompt-code-block p {
+      margin: 0; color: inherit; font-size: inherit; line-height: 1.6;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: .75rem 2rem;
+      background: linear-gradient(135deg, var(--blue-bright), var(--cyan));
+      color: var(--navy); font-weight: 700; text-decoration: none;
+      font-size: .85rem; letter-spacing: 1px;
+      border-radius: 3px;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 0 24px rgba(0,212,255,0.3);
+      margin-top: 1.5rem;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,212,255,0.5); }
+    .back-link {
+      display: inline-block;
+      margin-top: 4rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: .9rem;
+      transition: transform .2s;
+    }
+    .back-link:hover {
+      transform: translateX(-4px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2rem;
+      border-top: 1px solid rgba(26,158,255,0.08);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem; color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .project-detail-header { padding-top: 2rem; }
+    }
+    .product-list {
+      display: block;
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
+      column-gap: 2rem;
+      padding-left: 1.2rem;
+      margin: 0;
+    }
+    .product-list li {
+      font-size: .85rem;
+      line-height: 1.7;
+      margin-bottom: .5rem;
+    }
+    .system-flow {
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 3rem 0;
+    }
+    .system-flow .node {
+      background: rgba(6, 42, 78, 0.4);
+      border: 1px solid var(--blue-dark);
+      padding: .7rem 1.2rem;
+      border-radius: 4px;
+      text-align: center;
+      font-size: .8rem;
+      color: var(--text);
+      width: 260px;
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+    .system-flow .node small {
+      color: var(--text-muted);
+      font-size: 0.9em;
+    }
+    .system-flow .node.final {
+      background: rgba(0,212,255,0.08);
+      border-color: var(--cyan);
+      color: var(--white);
+    }
+    .system-flow .connector-down {
+      color: var(--cyan);
+      font-size: 1.5rem;
+      margin: .5rem 0;
+      line-height: 1;
+    }
+    .flow-item.single {
+      width: 100%;
+    }
+    .flow-branch-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+      margin-top: 1.5rem;
+    }
+    .flow-branch-container.small {
+      max-width: 560px;
+      gap: 1rem;
+    }
+    .flow-branch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .flow-branch .node {
+      width: 100%;
+    }
+    .branch-line-down {
+      position: absolute;
+      top: -1.5rem;
+      left: 50%;
+      width: 1px;
+      height: 1.5rem;
+      background: var(--cyan);
+    }
+    .branch-line-across {
+      position: absolute;
+      top: 0;
+      left: 25%;
+      width: 50%;
+      height: 1px;
+      background: var(--cyan);
+    }
+    .branch-line-across::before, .branch-line-across::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 1px;
+      height: 1.5rem;
+      background: var(--cyan);
+    }
+    .branch-line-across::before { left: 0; }
+    .branch-line-across::after { right: 0; }
+
+    .flow-merge-container {
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+      height: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .flow-merge-container.small {
+        max-width: 560px;
+    }
+    .flow-merge-container + .connector-down {
+      margin-top: 0;
+    }
+    .merge-line-up {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      height: 1.5rem;
+      background: var(--cyan);
+    }
+    .merge-line-across {
+      position: absolute;
+      bottom: 0;
+      left: 25%;
+      width: 50%;
+      height: 1px;
+      background: var(--cyan);
+    }
+    .merge-line-across::before, .merge-line-across::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 1px;
+      height: 1.5rem;
+      background: var(--cyan);
+    }
+    .merge-line-across::before { left: 0; }
+    .merge-line-across::after { right: 0; }
+
+    @media (max-width: 640px) {
+      .system-flow .node { width: 180px; font-size: .75rem; }
+      .flow-branch-container, .flow-merge-container { max-width: 400px !important; gap: 1rem; }
+    }
+    .fuzzy-tables-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+    .fuzzy-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .85rem;
+      background: rgba(6,42,78,0.15);
+      border: 1px solid var(--blue-dark);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .fuzzy-table caption {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--cyan);
+      padding: .8rem;
+      text-align: left;
+      background: rgba(6,42,78,0.4);
+      border-bottom: 1px solid var(--blue-dark);
+    }
+    .fuzzy-table th, .fuzzy-table td {
+      padding: .8rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(26,158,255,0.1);
+      vertical-align: middle;
+    }
+    .fuzzy-table th {
+      background: rgba(0,212,255,0.05);
+      color: var(--text);
+      font-weight: 600;
+    }
+    .fuzzy-table td {
+      color: var(--text-muted);
+    }
+    .fuzzy-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .fuzzy-table td:first-child { color: var(--text); }
+    .rule-base-table th {
+      text-align: center;
+    }
+    .rule-base-table tbody th {
+      text-align: left;
+    }
+    .process-steps {
+      margin-top: 2.5rem;
+      counter-reset: step-counter;
+      padding-left: 0;
+      list-style: none;
+    }
+    .process-steps li {
+      position: relative;
+      padding-left: 3.5rem;
+      padding-top: .2rem;
+      margin-bottom: 2rem;
+      font-size: .9rem;
+      color: var(--text-muted);
+    }
+    .process-steps li::before {
+      content: counter(step-counter);
+      counter-increment: step-counter;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid var(--blue-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: var(--cyan);
+      font-size: 1rem;
+    }
+    .process-steps li strong { display: block; margin-bottom: .4rem; color: var(--white); font-size: 1rem; }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">DSN</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#skills">Skills</a></li>
+    <li><a href="index.html#certificates">Certificates</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="project-detail">
+  <div class="project-detail-header">
+    <p class="section-tag">// project case study</p>
+    <h2 class="section-title">Nutri-Grade AI System</h2>
+    <p class="project-role">Klasifikasi Minuman & Rekomendasi Konsumsi Cerdas Berbasis CNN dan Logika Fuzzy Mamdani</p>
+    <div class="project-tech-stack">
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">TensorFlow/Keras</span>
+      <span class="tech-tag">Scikit-Fuzzy</span>
+      <span class="tech-tag">Flask</span>
+    </div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="project-content">
+    <p>Sistem kecerdasan buatan end-to-end yang memadukan Computer Vision untuk mengenali 30 jenis produk minuman kemasan di pasaran dan Logika Fuzzy Mamdani untuk menghitung skor kelayakan konsumsi secara granular berdasarkan kandungan gula dan lemak jenuh.</p>
+
+    <h3>Diagram Alir Sistem</h3>
+    <div class="system-flow">
+      <div class="flow-item single">
+        <div class="node">Pengumpulan Dataset</div>
+      </div>
+      <div class="connector-down">↓</div>
+      
+      <div class="flow-branch-container">
+        <div class="branch-line-down"></div>
+        <div class="branch-line-across"></div>
+        <div class="flow-branch left">
+          <div class="node">Dataset Citra Produk</div>
+          <div class="connector-down">↓</div>
+          <div class="node">Preprocessing Citra<br><small>(resize, normalisasi, augmentasi)</small></div>
+          <div class="connector-down">↓</div>
+          <div class="node">Pelatihan Model CNN</div>
+          <div class="connector-down">↓</div>
+          <div class="node">Klasifikasi Citra</div>
+        </div>
+        <div class="flow-branch right">
+          <div class="node">Informasi Nilai Gizi</div>
+          <div class="connector-down">↓</div>
+          <div class="node">Preprocessing Data Gizi<br><small>(Seleksi gula & lemak jenuh)</small></div>
+          <div class="connector-down">↓</div>
+          <div class="node">Normalisasi Gizi<br><small>(Konversi ke / 100 ml)</small></div>
+          <div class="connector-down">↓</div>
+          <div class="node">Perhitungan Nutri-Grade<br><small>(Penambahan kolom)</small></div>
+        </div>
+      </div>
+
+      <div class="flow-merge-container">
+        <div class="merge-line-up"></div>
+        <div class="merge-line-across"></div>
+      </div>
+      <div class="connector-down">↓</div>
+      <div class="flow-item single">
+        <div class="node">Pencocokan Data</div>
+      </div>
+      <div class="connector-down">↓</div>
+
+      <div class="flow-branch-container small">
+        <div class="branch-line-down"></div>
+        <div class="branch-line-across"></div>
+        <div class="flow-branch left">
+          <div class="node">Kandungan Gula/100ml</div>
+        </div>
+        <div class="flow-branch right">
+          <div class="node">Kandungan Lemak Jenuh/100ml</div>
+        </div>
+      </div>
+
+      <div class="flow-merge-container small">
+        <div class="merge-line-up"></div>
+        <div class="merge-line-across"></div>
+      </div>
+      <div class="connector-down">↓</div>
+      <div class="flow-item single">
+        <div class="node">Sistem Fuzzy Mamdani<br><small>(Penentuan Rekomendasi Konsumsi)</small></div>
+      </div>
+      <div class="connector-down">↓</div>
+      <div class="flow-item single">
+        <div class="node final">Output Akhir:<br><small>Klasifikasi, Nutri-Grade, & Rekomendasi</small></div>
+      </div>
+    </div>
+
+    <h3>📊 Pengumpulan & Pra-pemrosesan Data</h3>
+    <ul>
+      <li><strong>Dataset Primer:</strong> Dataset terdiri dari 1.500 citra primer (30 kelas produk, masing-masing 50 citra) yang diambil secara manual di lingkungan ritel nyata (Indomaret, Alfamart, Superindo) dengan variasi pencahayaan dan latar belakang.</li>
+      <li><strong>Pra-pemrosesan & Augmentasi:</strong> Tahapan pra-pemrosesan mencakup Resize citra ke 120x120 piksel, Normalisasi (rescale 1./255), dan Augmentasi data real-time (rotasi 20 derajat, zoom 20%, shift 20%, dan horizontal flip) untuk meningkatkan ketahanan model. Data dibagi 80:20 (1.200 latih, 300 validasi).</li>
+    </ul>
+
+    <div class="prompt-code-block" style="margin-top: 2rem; padding: 1.5rem 2rem;">
+      <p style="color: var(--white); font-weight: 600; margin-bottom: 1rem; font-size: .9rem;">Daftar 30 Kelas Produk yang Dikenali:</p>
+      <ol class="product-list">
+        <li>ABC Kopi Susu</li>
+        <li>BearBrand</li>
+        <li>Benecol Lychee 100ml</li>
+        <li>Cimory Bebas Laktosa 250ml</li>
+        <li>Cimory Susu Coklat Cashew</li>
+        <li>Cimory Yogurt Strawberry</li>
+        <li>Cola-Cola 390ml</li>
+        <li>Fanta Strawberry 390ml</li>
+        <li>Floridina 350ml</li>
+        <li>Fruit Tea Freeze 350ml</li>
+        <li>Garantea</li>
+        <li>Golda Cappucino</li>
+        <li>Hydro Coco Original 250ml</li>
+        <li>Ichitan Thai Green Tea</li>
+        <li>Larutan Penyegar rasa Jambu</li>
+        <li>Mizone 500ml</li>
+        <li>NU Green Tea Yogurt</li>
+        <li>Nutri Boost Orange Flavour 250ml</li>
+        <li>Oatside Cokelat</li>
+        <li>Pepsi Blue 330ml</li>
+        <li>Pocari Sweat 500 ml</li>
+        <li>Sprite 390ml</li>
+        <li>Teh Pucuk Harum</li>
+        <li>Tebs Sparkling 330ml</li>
+        <li>Teh Kotak 200ml</li>
+        <li>Tehbotol Sosro 250ml</li>
+        <li>Ultra Milk Coklat Ultrajaya 200ml</li>
+        <li>Ultramilk Fullcream 250ml</li>
+        <li>Yakult</li>
+        <li>You C 1000 Orange</li>
+      </ol>
+    </div>
+
+    <div class="media-placeholder" style="margin-top: 2.5rem;">
+      <img src="images/dataset_sample.png" alt="Contoh Citra Dataset Minuman">
+      <p style="font-size: 0.8rem; margin-top: 1rem;">Contoh variasi citra dalam dataset yang diambil dengan latar belakang, sudut, dan pencahayaan berbeda.</p>
+    </div>
+
+    <h3>🧠 Arsitektur Convolutional Neural Network (CNN)</h3>
+    <p>Menghindari model raksasa seperti VGG16 untuk mencegah overfitting pada dataset berukuran kecil, sistem ini menggunakan Arsitektur Custom yang efisien secara komputasi.</p>
+    <ul>
+      <li><strong>Feature Extraction:</strong> 3 Blok Konvolusi (32, 64, dan 128 filter) menggunakan kernel (3,3), aktivasi ReLU, yang masing-masing diikuti oleh MaxPooling2D (2,2).</li>
+      <li><strong>Classification:</strong> Lapisan Flatten, diikuti Dense Layer (512 neuron, ReLU).</li>
+      <li><strong>Regularization:</strong> Penggunaan Dropout (0.5) yang terbukti sangat krusial dalam menyaring fitur tidak relevan dan mencegah model menghafal data latih.</li>
+      <li><strong>Output:</strong> Dense Layer dengan 30 neuron (Softmax) yang dioptimasi menggunakan Adam Optimizer dan Categorical Crossentropy.</li>
+    </ul>
+    
+    <div class="media-placeholder" style="margin-top: 2rem;">
+      <img src="images/cnn_architecture.png" alt="Rancangan Arsitektur Model CNN">
+      <p style="font-size: 0.8rem; margin-top: 1rem;">Visualisasi arsitektur model CNN yang digunakan untuk klasifikasi citra produk.</p>
+    </div>
+    
+    <div class="prompt-code-block">
+      <p><strong><span style="color: var(--cyan);">[Evaluasi Model]</span></strong> Sistem mencapai stabilitas konvergensi pada epoch ke-61 (dengan Early Stopping) dan menghasilkan akurasi global rata-rata sebesar 92% (Weighted Avg F1-Score) berdasarkan evaluasi Confusion Matrix.</p>
+    </div>
+
+    <h3>⚖️ Sistem Pendukung Keputusan (Logika Fuzzy Mamdani)</h3>
+    <ul>
+      <li><strong>Masalah Batas Tajam (Sharp Boundary):</strong> Sistem regulasi gizi statis sering memvonis produk secara kaku (misal: 9.9g gula = Grade C, 10.1g = Grade D).</li>
+      <li><strong>Solusi Fuzzy:</strong> Sistem Fuzzy memetakan crisp input (Kandungan Gula 0-51g/100ml dan Lemak Jenuh 0-16g/100ml) ke dalam 3 himpunan linguistik (Rendah, Sedang, Tinggi) menggunakan kurva trapesium dan segitiga.</li>
+      <li><strong>Rule Base & Defuzzifikasi:</strong> Memanfaatkan matriks 9 Aturan (Rule Base) berbasis prinsip 'worst-attribute dominance', lalu menggunakan metode Centroid untuk menghasilkan output Skor Rekomendasi 0-100.</li>
+      <li><strong>Granularitas Output:</strong> Sistem memecah rekomendasi menjadi 7 tingkatan halus (Sangat Buruk, Buruk, Cukup Buruk, Sedang, Cukup Baik, Baik, Sangat Baik) sehingga penilaian menjadi lebih manusiawi.</li>
+    </ul>
+
+    <h4 style="margin-top: 3rem; font-size: 1.2rem; color: var(--white);">Tahapan Proses Inferensi Fuzzy</h4>
+    <ol class="process-steps">
+      <li>
+        <strong>Fuzzifikasi (Fuzzification)</strong>
+        Mengubah input numerik (crisp) menjadi nilai keanggotaan fuzzy. Misalnya, nilai Gula 8g/100ml akan dipetakan ke himpunan fuzzy: mungkin 80% 'SEDANG' dan 20% 'RENDAH'.
+      </li>
+      <li>
+        <strong>Aplikasi Fungsi Implikasi (Rule Evaluation)</strong>
+        Setiap aturan dalam Rule Base dievaluasi. Kekuatan aktivasi setiap aturan ditentukan oleh operator AND (mengambil nilai minimum dari keanggotaan input). Contoh: IF Gula 'SEDANG' (0.8) AND Lemak 'RENDAH' (0.9), maka kekuatan aturan adalah min(0.8, 0.9) = 0.8.
+      </li>
+      <li>
+        <strong>Agregasi (Aggregation)</strong>
+        Output dari semua aturan yang aktif digabungkan menjadi satu himpunan fuzzy tunggal untuk variabel output (Skor Rekomendasi). Proses ini menggunakan operator OR (mengambil nilai maksimum).
+      </li>
+      <li>
+        <strong>Defuzzifikasi (Defuzzification)</strong>
+        Himpunan fuzzy hasil agregasi diubah kembali menjadi nilai numerik (crisp) tunggal menggunakan metode Centroid (titik pusat massa), menghasilkan skor akhir antara 0-100.
+      </li>
+    </ol>
+
+    <div class="media-placeholder" style="margin-top: 2rem; margin-bottom: 2.5rem;">
+      <img src="images/fuzzy_membership_functions.png" alt="Visualisasi Fungsi Keanggotaan Fuzzy">
+      <p style="font-size: 0.8rem; margin-top: 1rem;">Visualisasi Fungsi Keanggotaan Fuzzy untuk variabel input (Gula, Lemak Jenuh) dan output (Skor Rekomendasi).</p>
+    </div>
+
+    <div class="fuzzy-tables-container">
+      <table class="fuzzy-table rule-base-table">
+        <caption>Matriks Aturan Fuzzy (Rule Base)</caption>
+        <thead>
+          <tr>
+            <th rowspan="2" style="border-right: 1px solid var(--blue-dark);"></th>
+            <th colspan="3">Lemak Jenuh</th>
+          </tr>
+          <tr>
+            <th>RENDAH</th>
+            <th>SEDANG</th>
+            <th>TINGGI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Gula RENDAH</th>
+            <td>SANGAT BAIK</td>
+            <td>BAIK</td>
+            <td>SEDANG</td>
+          </tr>
+          <tr>
+            <th scope="row">Gula SEDANG</th>
+            <td>CUKUP BAIK</td>
+            <td>CUKUP BURUK</td>
+            <td>BURUK</td>
+          </tr>
+          <tr>
+            <th scope="row">Gula TINGGI</th>
+            <td>BURUK</td>
+            <td>SANGAT BURUK</td>
+            <td>SANGAT BURUK</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="fuzzy-table">
+        <caption>Fungsi Keanggotaan Input: Kandungan Gula</caption>
+        <thead>
+          <tr>
+            <th>Himpunan Fuzzy</th>
+            <th>Rentang Nilai (g / 100 ml)</th>
+            <th>Kategori Nutri-Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rendah</td>
+            <td>0 – 5</td>
+            <td>Mewakili Grade A & Grade B</td>
+          </tr>
+          <tr>
+            <td>Sedang</td>
+            <td>> 5 – 10</td>
+            <td>Mewakili Grade C</td>
+          </tr>
+          <tr>
+            <td>Tinggi</td>
+            <td>> 10</td>
+            <td>Mewakili Grade D</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="fuzzy-table">
+        <caption>Fungsi Keanggotaan Input: Kandungan Lemak Jenuh</caption>
+        <thead>
+          <tr>
+            <th>Himpunan Fuzzy</th>
+            <th>Rentang Nilai (g / 100 ml)</th>
+            <th>Kategori Nutri-Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rendah</td>
+            <td>0 – 1,2</td>
+            <td>Mewakili Grade A & Grade B</td>
+          </tr>
+          <tr>
+            <td>Sedang</td>
+            <td>> 1,2 – 2,8</td>
+            <td>Mewakili Grade C</td>
+          </tr>
+          <tr>
+            <td>Tinggi</td>
+            <td>> 2,8</td>
+            <td>Mewakili Grade D</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="fuzzy-table">
+        <caption>Fungsi Keanggotaan Output: Skor Rekomendasi Konsumsi</caption>
+        <thead>
+          <tr>
+            <th>Himpunan Fuzzy</th>
+            <th>Rentang Parameter</th>
+            <th>Keterangan / Tingkat Rekomendasi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sangat Buruk</td>
+            <td>0 – 25</td>
+            <td>Berisiko sangat tinggi (Level terendah Grade D)</td>
+          </tr>
+          <tr>
+            <td>Buruk</td>
+            <td>15 – 45</td>
+            <td>Berisiko tinggi, sebaiknya hindari (Grade D)</td>
+          </tr>
+          <tr>
+            <td>Cukup Buruk</td>
+            <td>30 – 60</td>
+            <td>Mendekati batas bahaya, mulai batasi konsumsi</td>
+          </tr>
+          <tr>
+            <td>Sedang</td>
+            <td>45 – 75</td>
+            <td>Perhatikan porsi konsumsi (Transisi Grade C)</td>
+          </tr>
+          <tr>
+            <td>Cukup Baik</td>
+            <td>60 – 90</td>
+            <td>Relatif aman, boleh dikonsumsi (Transisi Grade B)</td>
+          </tr>
+          <tr>
+            <td>Baik</td>
+            <td>75 – 100</td>
+            <td>Pilihan sehat (Grade A & B)</td>
+          </tr>
+          <tr>
+            <td>Sangat Baik</td>
+            <td>90 – 100</td>
+            <td>Pilihan paling sehat, tanpa risiko (Murni Grade A)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="fuzzy-table">
+        <caption>Parameter Fungsi Keanggotaan Fuzzy</caption>
+        <thead>
+          <tr>
+            <th>Variabel</th>
+            <th>Himpunan Fuzzy</th>
+            <th>Bentuk Fungsi</th>
+            <th>Parameter</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="3">Kandungan Gula (g/100ml)</td>
+            <td>RENDAH</td>
+            <td>Trapesium turun</td>
+            <td>[0, 0, 4, 7.5]</td>
+          </tr>
+          <tr><td>SEDANG</td><td>Segitiga</td><td>[4, 7.5, 11]</td></tr>
+          <tr><td>TINGGI</td><td>Trapesium naik</td><td>[7.5, 12, 50, 50]</td></tr>
+          <tr>
+            <td rowspan="3">Kandungan Lemak Jenuh (g/100ml)</td>
+            <td>RENDAH</td><td>Trapesium turun</td><td>[0, 0, 1.0, 2.0]</td>
+          </tr>
+          <tr><td>SEDANG</td><td>Segitiga</td><td>[1.0, 2.0, 3.0]</td></tr>
+          <tr><td>TINGGI</td><td>Trapesium naik</td><td>[2.0, 4.0, 15, 15]</td></tr>
+          <tr>
+            <td rowspan="7">Skor Rekomendasi (Nilai 0-100)</td>
+            <td>SANGAT BURUK</td><td>Segitiga</td><td>[0, 0, 25]</td>
+          </tr>
+          <tr><td>BURUK</td><td>Segitiga</td><td>[15, 30, 45]</td></tr>
+          <tr><td>CUKUP BURUK</td><td>Segitiga</td><td>[30, 45, 60]</td></tr>
+          <tr><td>SEDANG</td><td>Segitiga</td><td>[45, 60, 75]</td></tr>
+          <tr><td>CUKUP BAIK</td><td>Segitiga</td><td>[60, 75, 90]</td></tr>
+          <tr><td>BAIK</td><td>Segitiga</td><td>[75, 90, 100]</td></tr>
+          <tr><td>SANGAT BAIK</td><td>Segitiga</td><td>[90, 100, 100]</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>🎥 Visualisasi & Live Demo</h3>
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <div class="media-placeholder">
+        <img src="images/web_interface.png" alt="Screenshot Interface Web Flask">
+        <p>Screenshot Interface Web Flask</p>
+      </div>
+      <div class="media-placeholder">
+        <img src="images/model_acurracy.png" alt="Grafik Training Accuracy & Loss">
+        <p>Grafik Training Accuracy & Loss</p>
+      </div>
+      <div class="media-placeholder">
+        <img src="images/confusion_matrix.png" alt="Visualisasi Confusion Matrix">
+        <p>Visualisasi Confusion Matrix</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="https://huggingface.co/spaces/destyawan/nutri-grade-ai" class="btn-primary">Coba Live Demo (Hugging Face Spaces)</a>
+    </div>
+
+    <a href="index.html#projects" class="back-link">← Kembali ke Daftar Project</a>
+  </div>
+</section>
+
+<footer style="padding-bottom: 4rem;">
+  <div style="margin-bottom: 2.5rem; text-align: center;">
+    <a href="#" id="ask-ai-button" class="btn-primary" style="display: inline-block; text-decoration: none;">Tanya AI Asisten</a>
+    <p style="font-size: .8rem; color: var(--text-muted); margin-top: 1rem;">Punya pertanyaan tentang proyek ini? Tanyakan pada asisten AI saya.</p>
+  </div>
+  <div style="font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--text-muted); text-align: center;">
+    © 2026 Destyawan S.N — Dibangun dengan memadukan kecerdasan buatan dan logika.
+  </div>
+</footer>
+
+<link href="https://url-n8n-anda.com/chat/style.css" rel="stylesheet" />
+<script type="module">
+  import { createChat } from 'https://url-n8n-anda.com/chat/chat.bundle.js';
+
+  // PENTING: Pastikan 'url-n8n-anda.com' sudah diganti dengan URL n8n Anda.
+  const chat = createChat({
+    webhookUrl: 'https://url-n8n-anda.com/webhook/chat',
+    initialMessages: [
+      'Halo! 👋 Saya adalah AI Asisten Destyawan.',
+      'Ada yang ingin Anda ketahui tentang proyek Nutri-Grade AI ini?'
+    ],
+    i18n: {
+      en: {
+        chatBox: {
+          title: 'Tanya Desta AI',
+          subtitle: 'Tanya seputar proyek ini',
+        },
+      },
+    },
+    theme: { colors: { primary: '#00d4ff', accent: '#1a9eff', textLight: '#ffffff' } },
+  });
+
+  const askAiButton = document.getElementById('ask-ai-button');
+  if (askAiButton) {
+    askAiButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      chat.open();
+    });
+  }
+</script>
+
+</body>
+</html>

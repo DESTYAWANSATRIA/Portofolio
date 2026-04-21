@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Destyawan S.N — AI Engineer & Solutions Architect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@400;600;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #020b18;
+      --navy2: #041425;
+      --blue-dark: #062a4e;
+      --blue-mid: #0a5c9e;
+      --blue-bright: #1a9eff;
+      --cyan: #00d4ff;
+      --cyan-glow: rgba(0,212,255,0.18);
+      --text: #d6eeff;
+      --text-muted: #6a9bbf;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--blue-bright); border-radius: 2px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(2,11,24,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(26,158,255,0.12);
+    }
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+      transition: color .25s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+      background: var(--cyan);
+      transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      padding: 6rem 4rem 4rem;
+    }
+
+    /* Grid dots background */
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(26,158,255,0.12) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0,212,255,0.08) 0%, transparent 40%),
+        radial-gradient(rgba(26,158,255,0.08) 1px, transparent 1px);
+      background-size: auto, auto, 40px 40px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1100px; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; gap: 4rem;
+      position: relative; z-index: 1;
+    }
+
+    .hero-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem; letter-spacing: 3px; color: var(--cyan);
+      text-transform: uppercase; margin-bottom: 1rem;
+      opacity: 0; animation: fadeUp .6s ease .2s forwards;
+    }
+    .hero-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 900; line-height: 1.05;
+      color: var(--white);
+      opacity: 0; animation: fadeUp .6s ease .4s forwards;
+    }
+    .hero-name span { color: var(--cyan); }
+    .hero-title {
+      font-size: 1rem; color: var(--blue-bright);
+      margin: 1rem 0 1.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 1px;
+      opacity: 0; animation: fadeUp .6s ease .6s forwards;
+    }
+    .hero-quote {
+      font-size: 0.88rem; color: var(--text-muted);
+      line-height: 1.7; border-left: 2px solid var(--cyan);
+      padding-left: 1rem;
+      opacity: 0; animation: fadeUp .6s ease .8s forwards;
+    }
+    .hero-buttons {
+      display: flex; gap: 1rem; margin-top: 2.4rem;
+      opacity: 0; animation: fadeUp .6s ease 1s forwards;
+    }
+    .btn-primary {
+      padding: .75rem 2rem;
+      background: linear-gradient(135deg, var(--blue-bright), var(--cyan));
+      color: var(--navy); font-weight: 700; text-decoration: none;
+      font-size: .85rem; letter-spacing: 1px;
+      border-radius: 3px;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 0 24px rgba(0,212,255,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,212,255,0.5); }
+    .btn-outline {
+      padding: .75rem 2rem;
+      border: 1px solid var(--blue-bright); color: var(--blue-bright);
+      text-decoration: none; font-size: .85rem; letter-spacing: 1px;
+      border-radius: 3px;
+      transition: background .2s, color .2s;
+    }
+    .btn-outline:hover { background: var(--blue-bright); color: var(--navy); }
+
+    /* Neural orb */
+    .hero-orb {
+      display: flex; justify-content: center; align-items: center;
+      opacity: 0; animation: fadeIn 1.2s ease .5s forwards;
+    }
+    .orb-wrap {
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(0,212,255,0.25), rgba(10,92,158,0.15), rgba(2,11,24,0));
+      border: 1px solid rgba(0,212,255,0.2);
+      box-shadow: 0 0 80px rgba(0,212,255,0.15), inset 0 0 60px rgba(26,158,255,0.05);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      animation: pulse 4s ease-in-out infinite;
+    }
+    .orb-wrap::before {
+      content: '';
+      position: absolute; inset: -20px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,212,255,0.07);
+      animation: pulse 4s ease-in-out 1s infinite;
+    }
+    .orb-inner {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4rem; color: var(--cyan);
+      text-shadow: 0 0 40px var(--cyan), 0 0 80px rgba(0,212,255,0.4);
+      font-weight: 900;
+    }
+    @keyframes pulse { 0%,100%{transform:scale(1)}50%{transform:scale(1.03)} }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 4rem; max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem; letter-spacing: 3px; color: var(--cyan);
+      text-transform: uppercase; margin-bottom: .6rem;
+    }
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.6rem,3.5vw,2.6rem); font-weight: 700;
+      color: var(--white); margin-bottom: 3rem;
+    }
+    .section-line {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    #about .about-grid {
+      display: grid; grid-template-columns: 1fr 2fr;
+      gap: 4rem; align-items: start;
+    }
+    .about-photo-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    .photo-frame {
+      width: 180px; height: 180px; border-radius: 50%;
+      border: 2px solid var(--cyan);
+      box-shadow: 0 0 30px rgba(0,212,255,0.2);
+      background: var(--blue-dark);
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; color: var(--cyan);
+    }
+    .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-name {
+      font-family: 'Orbitron', monospace; font-size: .85rem;
+      color: var(--white); text-align: center;
+    }
+    .photo-role { font-size: .75rem; color: var(--text-muted); text-align: center; }
+
+    .about-text p { line-height: 1.9; color: var(--text); margin-bottom: 1.2rem; font-size: .95rem; }
+    .about-quote {
+      margin-top: 2rem;
+      padding: 1.2rem 1.4rem;
+      background: rgba(0,212,255,0.04);
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 4px 4px 0;
+    }
+    .about-quote p { margin: 0; color: var(--text-muted); font-style: italic; }
+    .about-quote strong { color: var(--cyan); font-style: normal; }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: linear-gradient(180deg, transparent, rgba(6,42,78,0.15), transparent); }
+    .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .exp-card {
+      padding: 1.8rem 2rem;
+      background: rgba(4,20,37,0.6);
+      border: 1px solid rgba(26,158,255,0.12);
+      border-left: 3px solid var(--cyan);
+      border-radius: 4px;
+      transition: border-color .3s, transform .3s;
+      position: relative; overflow: hidden;
+    }
+    .exp-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,212,255,0.04), transparent);
+      opacity: 0; transition: opacity .3s; pointer-events: none;
+    }
+    .exp-card:hover { border-left-color: var(--blue-bright); transform: translateX(4px); }
+    .exp-card:hover::before { opacity: 1; }
+    .exp-role { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: .3rem; }
+    .exp-company { font-size: .82rem; color: var(--cyan); font-family: 'JetBrains Mono', monospace; margin-bottom: .5rem; }
+    .exp-date { font-size: .75rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; margin-bottom: 1.2rem; }
+    .exp-desc { font-size: .85rem; color: var(--text-muted); line-height: 1.7; }
+    .exp-desc-list { font-size: .85rem; color: var(--text-muted); line-height: 1.7; margin-left: 1.2rem; display: flex; flex-direction: column; gap: .6rem; margin-bottom: 1.5rem; }
+    .exp-desc-list strong { color: var(--text); }
+    .exp-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .exp-gallery img { width: 100%; height: auto; border-radius: 4px; border: 1px solid rgba(26,158,255,0.2); transition: transform .3s, border-color .3s; object-fit: cover; aspect-ratio: 16/9; }
+    .exp-gallery img:hover { transform: scale(1.02); border-color: var(--cyan); }
+
+    /* ── PROJECTS ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 1.5rem; }
+    .project-card {
+      padding: 2rem;
+      background: rgba(4,20,37,0.7);
+      border: 1px solid rgba(26,158,255,0.12);
+      border-radius: 6px;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+      position: relative; overflow: hidden;
+    }
+    .project-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue-bright));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .4s;
+    }
+    .project-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,212,255,0.1); border-color: rgba(26,158,255,0.3); }
+    .project-card:hover::after { transform: scaleX(1); }
+    .project-num {
+      font-family: 'Orbitron', monospace; font-size: 2.5rem; font-weight: 900;
+      color: rgba(0,212,255,0.08); position: absolute; top: 1rem; right: 1.5rem;
+    }
+    .project-title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: .5rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin: .8rem 0; }
+    .tag {
+      font-size: .7rem; font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan); background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.2);
+      padding: .2rem .6rem; border-radius: 2px;
+    }
+    .project-desc { font-size: .85rem; color: var(--text-muted); line-height: 1.7; }
+    .project-link {
+      display: inline-block; margin-top: 1.2rem;
+      font-size: .78rem; font-family: 'JetBrains Mono', monospace;
+      color: var(--blue-bright); text-decoration: none; letter-spacing: 1px;
+      transition: color .2s;
+    }
+    .project-link:hover { color: var(--cyan); }
+
+    /* ── SKILLS ── */
+    .skills-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .skill-group h3 {
+      font-size: .78rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--cyan); font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 1.2rem;
+    }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .chip {
+      padding: .5rem 1rem;
+      background: rgba(4,20,37,0.8);
+      border: 1px solid rgba(26,158,255,0.2);
+      border-radius: 3px;
+      font-size: .8rem; color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      transition: border-color .25s, color .25s, box-shadow .25s;
+      cursor: default;
+    }
+    .chip:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 12px rgba(0,212,255,0.15); }
+
+    /* ── CERTIFICATES ── */
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 1.2rem; }
+    .cert-card {
+      padding: 1.5rem;
+      background: rgba(4,20,37,0.6);
+      border: 1px solid rgba(26,158,255,0.1);
+      border-radius: 5px;
+      display: flex; align-items: flex-start; gap: 1rem;
+      transition: border-color .3s, transform .3s;
+      text-decoration: none;
+    }
+    .cert-card:hover { border-color: rgba(0,212,255,0.35); transform: translateY(-3px); }
+    .cert-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .cert-name { font-size: .88rem; color: var(--white); font-weight: 600; margin-bottom: .3rem; }
+    .cert-issuer { font-size: .75rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+
+    /* ── CONTACT ── */
+    #contact {
+      text-align: center;
+      position: relative;
+    }
+    #contact::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,212,255,0.06), transparent);
+      pointer-events: none;
+    }
+    .contact-tagline {
+      font-size: 1rem; color: var(--text-muted); max-width: 540px;
+      margin: 0 auto 2.5rem; line-height: 1.8;
+    }
+    .contact-links { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+    .contact-link {
+      display: flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.8rem;
+      border: 1px solid rgba(26,158,255,0.25);
+      border-radius: 3px; text-decoration: none;
+      color: var(--text); font-size: .85rem;
+      font-family: 'JetBrains Mono', monospace;
+      transition: border-color .25s, color .25s, background .25s;
+    }
+    .contact-link:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,212,255,0.05); }
+    .contact-link svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2rem;
+      border-top: 1px solid rgba(26,158,255,0.08);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem; color: var(--text-muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero, section { padding: 4rem 1.5rem; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-orb { display: none; }
+      #about .about-grid { grid-template-columns: 1fr; }
+      .skills-wrapper { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="#hero">DSN</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certificates">Certificates</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-label">// AI Engineer & Solutions Architect</p>
+      <h1 class="hero-name">Destyawan<br/><span>S.N</span></h1>
+      <p class="hero-title">AI Engineer & Solutions Architect</p>
+      <p class="hero-quote">
+        "Jangan biarkan sesuatu menjadi Anomali—karena anomali sejatinya tidak ada.
+        Itu hanya cerminan dari ketidaktahuan kita."
+      </p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn-primary">Lihat Project →</a>
+        <a href="#contact" class="btn-outline">Hubungi Saya</a>
+      </div>
+    </div>
+    <div class="hero-orb">
+      <div class="orb-wrap">
+        <div class="orb-inner">AI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-tag">// 01. about me</p>
+    <h2 class="section-title">Tentang Saya</h2>
+    <div class="section-line"></div>
+    <div class="about-grid">
+      <div class="about-photo-wrap">
+        <div class="photo-frame">
+          <!-- Ganti src dengan foto Anda -->
+          <img src="images/profil.jpg" alt="Foto Destyawan S.N" />
+        </div>
+        <p class="photo-name">Destyawan S.N</p>
+        <p class="photo-role">AI Engineer & Solutions Architect</p>
+      </div>
+      <div class="about-text">
+        <p>
+          Saya adalah seorang insinyur Kecerdasan Buatan (AI) yang memiliki passion besar dalam menjembatani kerumitan model data dengan solusi bisnis yang humanis. Ketertarikan mendalam saya pada Machine Learning, khususnya Computer Vision dan NLP, mendorong saya untuk terus mengeksplorasi bagaimana mesin dapat memahami dan berinteraksi dengan dunia manusia.
+        </p>
+        <p>
+          Secara akademis, saya terbiasa membangun fondasi algoritma yang solid, mulai dari melatih model Convolutional Neural Networks (CNN) untuk ekstraksi fitur visual hingga merancang sistem Fuzzy Logic untuk mesin rekomendasi berskala presisi tinggi.
+        </p>
+        <p>
+          Di dunia industri, saya telah mengaplikasikan keahlian tersebut sebagai AI Prompt Trainer. Saya merancang dan mengoptimalkan arsitektur Large Language Models (LLM) untuk 10 klien B2B dari berbagai sektor industri. Fokus saya adalah mengendalikan perilaku AI melalui guardrails yang ketat, mengintegrasikan function/tool calling menggunakan Python dan n8n, serta mendeploy AI tersebut ke lingkungan omnichannel (WhatsApp, Website, Media Sosial) dengan latensi rendah.
+        </p>
+        <p>
+          Saya percaya bahwa teknologi AI terbaik bukan sekadar soal akurasi matematis, melainkan tentang bagaimana sistem tersebut dapat memecahkan masalah operasional nyata tanpa halusinasi dan dengan pengalaman pengguna (UX) yang natural. Saat ini, saya sangat antusias untuk membawa perpaduan keahlian riset data dan eksekusi Generative AI ini ke tantangan rekayasa teknologi berikutnya.
+        </p>
+        <div class="about-quote">
+          <p><strong>"Jangan biarkan sesuatu menjadi Anomali"</strong></p>
+          <p>"karena anomali sejatinya tidak ada. Itu hanya cerminan dari
+ketidaktahuan kita. Bila tidak tahu, maka carilah tahu."</p>
+          <p>— Destyawan S.N</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="reveal">
+    <p class="section-tag">// 02. experience</p>
+    <h2 class="section-title">Pengalaman</h2>
+    <div class="section-line"></div>
+    <div class="exp-list">
+
+      <div class="exp-card">
+        <div class="exp-role">Prompt AI Trainer Intern</div>
+        <div class="exp-company">Aksoro (Malika AI)</div>
+        <div class="exp-date">Desember 2025 - February 2026</div>
+        <ul class="exp-desc-list">
+          <li><strong>Training Delivery & Client Onboarding:</strong> Memimpin sesi onboarding dan konsultasi komprehensif secara virtual untuk memetakan alur bisnis, kebutuhan spesifik, dan ekspektasi fungsional dari 10 klien B2B berbagai sektor.</li>
+          <li><strong>AI Architecture & Product Knowledge:</strong> Menerapkan pemahaman mendalam terkait teknologi AI Customer Service terkini dengan merancang System Prompt (instruksi, persona, dan guardrails) serta membangun Knowledge Base spesifik untuk masing-masing klien.</li>
+          <li><strong>Advanced Tool Integration:</strong> Mengembangkan solusi teknis di luar standar pelatihan dengan mengintegrasikan function calling menggunakan n8n dan Python, memungkinkan AI mengakses spreadsheet klien dan menghitung harga dinamis (add-ons/ongkir) secara real-time.</li>
+          <li><strong>Feedback Loop & Iterative QA:</strong> Mengelola siklus feedback secara aktif antara pengujian mandiri dan evaluasi klien. Melakukan kalibrasi prompt dan logika bot secara berkesinambungan untuk menekan tingkat halusinasi AI dan mengoptimalkan performa respons.</li>
+          <li><strong>Omnichannel Deployment & User Support:</strong> Memastikan kelancaran peluncuran produk AI ke berbagai antarmuka pengguna (WhatsApp, Facebook, Instagram, Website) dan memberikan panduan teknis berkelanjutan (ongoing support) agar klien dapat memaksimalkan penggunaan asisten virtual mereka.</li>
+          <li><strong>Content Development:</strong> Menyusun materi dokumentasi operasional, panduan alur percakapan, dan basis pengetahuan terstruktur yang diintegrasikan langsung ke dalam memori asisten AI.</li>
+        </ul>
+        <div class="exp-gallery">
+          <!-- Ganti src di bawah dengan path gambar Anda yang sebenarnya -->
+          <img src="images/aksoro-1.jpeg" alt="Dokumentasi Pekerjaan Aksoro 1" />
+          <img src="images/aksoro-2.jpeg" alt="Dokumentasi Pekerjaan Aksoro 2" />
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-role">Machine Learning Engineer Cohort</div>
+        <div class="exp-company">Bangkit Academy by Google, GoTo, Traveloka (PT Dicoding Academy Indonesia)</div>
+        <div class="exp-date">September 2024 – Januari 2025</div>
+        <ul class="exp-desc-list">
+          <li><strong>Capstone Project Achievement (Top 50 National):</strong> Mengembangkan "Belens (Beverage Lens)", sebuah aplikasi inovatif berbasis Computer Vision untuk mendeteksi produk minuman kemasan dan mengklasifikasikan tingkat kandungan gulanya. Proyek ini terpilih sebagai Top 50 Product-Based Capstone Project dari ribuan tim di seluruh Indonesia.</li>
+          <li><strong>End-to-End Model Development:</strong> Merancang dan melatih arsitektur Convolutional Neural Networks (CNN) menggunakan framework TensorFlow. Mengimplementasikan teknik Transfer Learning (seperti MobileNet/EfficientNet) guna mempercepat proses pelatihan dan mengoptimalkan performa model klasifikasi multi-kelas hingga mencapai akurasi di atas 90%.</li>
+          <li><strong>Data Pipeline & Engineering:</strong> Bertanggung jawab penuh atas siklus data, mulai dari pengumpulan 1.500+ citra produk minuman, pelabelan, hingga prapemrosesan data. Menerapkan teknik augmentasi data kompleks (rotasi, zoom, translasi, dan flip) untuk memperkaya variasi data latih dan mencegah overfitting pada model.</li>
+          <li><strong>Nutritional Logic Integration:</strong> Menjembatani output prediksi model AI dengan database gizi menggunakan Pandas. Mengembangkan algoritma klasifikasi khusus berbasis Nutri-Score untuk melabeli tingkat keamanan konsumsi produk (kategori Safe, Moderately Safe, Dangerous) berdasarkan analisis kandungan gula.</li>
+          <li><strong>Intensive AI Mastery:</strong> Menyelesaikan lebih dari 400 jam pelatihan komprehensif berstandar industri global (sertifikasi Coursera & DeepLearning.AI), menguasai fundamental Supervised/Unsupervised Learning, Natural Language Processing (NLP), Time Series Forecasting, hingga Generative Adversarial Networks (GANs) dan integrasi deployment model.</li>
+        </ul>
+        <div class="exp-gallery">
+          <!-- Ganti src di bawah dengan path gambar Anda yang sebenarnya -->
+          <img src="images/bangkit-1.png" alt="Dokumentasi Bangkit 1" />
+          <img src="images/bangkit-2.png" alt="Dokumentasi Bangkit 2" />
+        </div>
+        <a href="https://github.com/Belens-Capstone-Project" target="_blank" class="project-link">→ Lihat dokumentasi</a>
+      </div>
+
+      <!-- Tambahkan pengalaman lainnya di sini -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="reveal">
+    <p class="section-tag">// 03. projects</p>
+    <h2 class="section-title">Project</h2>
+    <div class="section-line"></div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-num">01</div>
+        <div class="project-title">Belens – Beverage Lens</div>
+        <div class="project-tags">
+          <span class="tag">Computer Vision</span>
+          <span class="tag">TensorFlow</span>
+          <span class="tag">Android</span>
+        </div>
+        <p class="project-desc">
+          Bangkit Capstone Project 2024. Aplikasi pengenalan minuman berbasis kamera
+          yang memberikan informasi nutrisi secara real-time menggunakan model ML.
+        </p>
+        <a href="https://github.com/Belens-Capstone-Project" class="project-link">→ Lihat Project</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">02</div>
+        <div class="project-title">Nutri-Grade AI System</div>
+        <div class="project-tags">
+          <span class="tag">Deep Learning</span>
+          <span class="tag">TensorFlow/Keras</span>
+          <span class="tag">Python</span>
+          <span class="tag">Scikit-Fuzzy</span>
+          <span class="tag">Recommendation</span>
+          <span class="tag">Flask</span>
+        </div>
+        <p class="project-desc">
+          Sistem rekomendasi nutrisi yang menganalisis kebutuhan gizi pengguna dan
+          memberikan saran minuman yang dipersonalisasi.
+        </p>
+        <a href="portfolio-case-study-nutrigrade.html" class="project-link">→ Lihat Project</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">03</div>
+        <div class="project-title">Peore AgroTech: AI-Driven B2B Orchestration System</div>
+        <div class="project-tags">
+          <span class="tag">Gemini 2.5 Flash</span>
+          <span class="tag">n8n (Workflow Automation)</span>
+          <span class="tag">Telegram API</span>
+          <span class="tag">Notion API (CRM)</span>
+          <span class="tag">JavaScript / Regex</span>
+        </div>
+        <p class="project-desc">
+          Autonomous B2B Sales Agent untuk sektor pertanian yang mengotomatiskan
+          proses penjualan dan komunikasi bisnis menggunakan kecerdasan buatan.
+        </p>
+        <a href="peore-agrotech-detail.html" class="project-link">→ Lihat Studi Kasus</a>
+      </div>
+
+      <!-- Tambahkan project lainnya di sini -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="reveal">
+    <p class="section-tag">// 04. skills</p>
+    <h2 class="section-title">Keahlian</h2>
+    <div class="section-line"></div>
+    <div class="skills-wrapper">
+
+      <div class="skill-group">
+        <h3>Programming Languages</h3>
+        <div class="skill-chips">
+          <span class="chip">Python</span>
+          <span class="chip">R</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Java</span>
+          <span class="chip">Scala</span>
+          <span class="chip">C++</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>IDE & Tools</h3>
+        <div class="skill-chips">
+          <span class="chip">VS Code</span>
+          <span class="chip">PyCharm</span>
+          <span class="chip">Jupyter</span>
+          <span class="chip">Colab</span>
+          <span class="chip">Docker</span>
+          <span class="chip">N8N</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>ML & Data Libraries</h3>
+        <div class="skill-chips">
+          <span class="chip">TensorFlow</span>
+          <span class="chip">PyTorch</span>
+          <span class="chip">Scikit-learn</span>
+          <span class="chip">Pandas</span>
+          <span class="chip">NumPy</span>
+          <span class="chip">OpenCV</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Data Visualization</h3>
+        <div class="skill-chips">
+          <span class="chip">Matplotlib</span>
+          <span class="chip">Seaborn</span>
+          <span class="chip">Power BI</span>
+          <span class="chip">Tableau</span>
+          <span class="chip">Plotly</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CERTIFICATES ── -->
+<section id="certificates">
+  <div class="reveal">
+    <p class="section-tag">// 05. certificates</p>
+    <h2 class="section-title">Sertifikat</h2>
+    <div class="section-line"></div>
+    <div class="cert-grid">
+
+      <div class="cert-card">
+        <div class="cert-icon">🎓</div>
+        <div>
+          <div class="cert-name">Bangkit Academy — Machine Learning Path</div>
+          <div class="cert-issuer">Google · Tokopedia · Gojek · Traveloka</div>
+        </div>
+      </div>
+
+      <!-- ── SPECIALIZATION CERTIFICATES ── -->
+      <a href="https://coursera.org/share/56275dded861c0f3b109f9693de21ff7" target="_blank" class="cert-card">
+        <div class="cert-icon">🏆</div>
+        <div>
+          <div class="cert-name">Machine Learning Specialization</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/f5d1ad55c1835e7b0dbfc494a3ea3f02" target="_blank" class="cert-card">
+        <div class="cert-icon">🏆</div>
+        <div>
+          <div class="cert-name">DeepLearning.AI TensorFlow Developer</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <!-- ── DICODING CERTIFICATES ── -->
+      <a href="https://www.dicoding.com/certificates/1OP84D2RLZQK" target="_blank" class="cert-card">
+        <div class="cert-icon">🏅</div>
+        <div>
+          <div class="cert-name">Memulai Dasar Pemrograman</div>
+          <div class="cert-issuer">Dicoding</div>
+        </div>
+      </a>
+
+      <a href="https://www.dicoding.com/certificates/L4PQ5MEWOZO1" target="_blank" class="cert-card">
+        <div class="cert-icon">🏅</div>
+        <div>
+          <div class="cert-name">Pengenalan Logika Pemrograman</div>
+          <div class="cert-issuer">Dicoding</div>
+        </div>
+      </a>
+
+      <a href="https://www.dicoding.com/certificates/1RXY24EDMXVM" target="_blank" class="cert-card">
+        <div class="cert-icon">🏅</div>
+        <div>
+          <div class="cert-name">Dasar Git & GitHub</div>
+          <div class="cert-issuer">Dicoding</div>
+        </div>
+      </a>
+
+      <a href="https://www.dicoding.com/certificates/07Z64V4VMPQR" target="_blank" class="cert-card">
+        <div class="cert-icon">🏅</div>
+        <div>
+          <div class="cert-name">Belajar Analisis Data dengan Python</div>
+          <div class="cert-issuer">Dicoding</div>
+        </div>
+      </a>
+
+      <!-- ── COURSERA COURSES ── -->
+      <a href="https://coursera.org/share/d42726ed72393fad156c1899b5bf2e62" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Crash Course on Python</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/0249fc9e533dff0ca022996013a43487" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Using Python to Interact with the OS</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/8f74357b0fac26a5ff8e2e908c2d9534" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Supervised ML: Regression and Classification</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/e963660493fd8c663d35789ac35219a0" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Advanced Learning Algorithms</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/13baa0554e6564fb4e65c5bdc75eaa45" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Unsupervised Learning & Reinforcement Learning</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/1618b28a1dd118530effb04caf3477d1" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Linear Algebra for ML</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/35ec1b77bb9febea87f29ad3e35e6794" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Introduction to TensorFlow</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/a19c68b9f801da0b32e6006c5db61129" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">CNN in TensorFlow</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/08e0c8862d62f7d60160854c38722a2e" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Natural Language Processing in TensorFlow</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/f477a9772561385328168fdbb97c9dca" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Sequences, Time Series & Prediction</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/0e270f7aa30293a74c00b91b5a47267c" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Custom and Distributed Training</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/7766da092fb69b80a7ceb35663ecdf99" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Device-Based Models with TensorFlow Lite</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/f479582bd651958710d955b383883adc" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Browser-Based Models with TensorFlow.js</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/916f4eaf917aaa102f5503f885142194" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Data Pipelines with TF Data Service</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://www.coursera.org/account/accomplishments/verify/QLXXCYALD86T" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Advanced Computer Vision with TensorFlow</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/39932a7ac505bde5d880aa08736e431f" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Generative AI for Everyone</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+      <a href="https://coursera.org/share/21e399ffa3b1e062c0c11dcbb84298a1" target="_blank" class="cert-card">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">GANs: Build Basic Generative Adversarial Networks</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="reveal">
+    <p class="section-tag">// 06. contact</p>
+    <h2 class="section-title">Hubungi Saya</h2>
+    <div class="section-line" style="margin:0 auto 2rem"></div>
+    <p class="contact-tagline">
+      Mari diskusikan bagaimana otomatisasi AI dapat mengefisienkan 
+      alur kerja bisnis Anda.
+    </p>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/destyawan-satria-nugraha-63a43a396/" class="contact-link" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/DESTYAWANSATRIA" class="contact-link" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+      <a href="mailto:destyawansatrian@gmail.com" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  © 2026 Destyawan S.N — Dibangun dengan memadukan kecerdasan buatan dan logika.
+</footer>
+
+<script>
+  // Scroll reveal (Kode bawaan Kakak)
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => obs.observe(r));
+</script>
+
+<link href="https://18rq2o.n8n.bocindonesia.com/chat/style.css" rel="stylesheet" />
+<script type="module">
+  import { createChat } from 'https://18rq2o.n8n.bocindonesia.com/chat/chat.bundle.js';
+
+  createChat({
+    webhookUrl: 'https://18rq2o.n8n.bocindonesia.com/webhook/86a2ddb3-e09e-41b1-a8d0-5f6535fb808b/chat',
+    initialMessages: [
+      'Halo! 👋 Saya adalah AI Asisten Destyawan.',
+      'Ada yang ingin Anda ketahui tentang pengalaman Desta di Machine Learning atau Generative AI?'
+    ],
+    i18n: {
+      en: { chatBox: { title: 'Tanya Desta AI', subtitle: 'Tanya seputar pengalaman & skill' } }
+    },
+    theme: {
+      colors: { primary: '#00d4ff', accent: '#1a9eff', textLight: '#ffffff' }
+    },
+    chatWindow: { position: 'right' },
+    chatBubble: {
+      position: 'bottom-right',
+      customIcon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8" /><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 2v2" /><path d="M9 2v2" /></svg>`
+    }
+  });
+
+  const askAiButton = document.getElementById('ask-ai-button');
+  if (askAiButton) {
+    askAiButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      const n8nFloatingButton = document.querySelector('.chat-window-toggle');
+      if (n8nFloatingButton) n8nFloatingButton.click();
+    });
+  }
+</script>
+
+</body>
+</html>
