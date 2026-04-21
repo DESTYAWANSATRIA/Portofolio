@@ -892,11 +892,14 @@ ketidaktahuan kita. Bila tidak tahu, maka carilah tahu."</p>
   reveals.forEach(r => obs.observe(r));
 </script>
 
-<link href="https://18rq2o.n8n.bocindonesia.com/chat/style.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
 <script type="module">
-  import { createChat } from 'https://18rq2o.n8n.bocindonesia.com/chat/chat.bundle.js';
+  // PERHATIKAN: Kita ambil JS dari CDN Publik (pakai .es.js) agar kebal CORS
+  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
   createChat({
+    // Webhook URL TETAP mengarah ke server n8n Kakak
     webhookUrl: 'https://18rq2o.n8n.bocindonesia.com/webhook/86a2ddb3-e09e-41b1-a8d0-5f6535fb808b/chat',
     initialMessages: [
       'Halo! 👋 Saya adalah AI Asisten Destyawan.',
@@ -915,6 +918,7 @@ ketidaktahuan kita. Bila tidak tahu, maka carilah tahu."</p>
     }
   });
 
+  // Logika penyambung untuk tombol "Tanya AI Asisten" di menu Contact
   const askAiButton = document.getElementById('ask-ai-button');
   if (askAiButton) {
     askAiButton.addEventListener('click', (e) => {
@@ -924,6 +928,5 @@ ketidaktahuan kita. Bila tidak tahu, maka carilah tahu."</p>
     });
   }
 </script>
-
 </body>
 </html>
