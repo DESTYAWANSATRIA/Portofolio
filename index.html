@@ -892,14 +892,11 @@ ketidaktahuan kita. Bila tidak tahu, maka carilah tahu."</p>
   reveals.forEach(r => obs.observe(r));
 </script>
 
-<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-
+<link href="https://18rq2o.n8n.bocindonesia.com/chat/style.css" rel="stylesheet" />
 <script type="module">
-  // PERHATIKAN: Kita ambil JS dari CDN Publik (pakai .es.js) agar kebal CORS
-  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+  import { createChat } from 'https://18rq2o.n8n.bocindonesia.com/chat/chat.bundle.js';
 
   createChat({
-    // Webhook URL TETAP mengarah ke server n8n Kakak
     webhookUrl: 'https://18rq2o.n8n.bocindonesia.com/webhook/86a2ddb3-e09e-41b1-a8d0-5f6535fb808b/chat',
     initialMessages: [
       'Halo! 👋 Saya adalah AI Asisten Destyawan.',
@@ -914,19 +911,10 @@ ketidaktahuan kita. Bila tidak tahu, maka carilah tahu."</p>
     chatWindow: { position: 'right' },
     chatBubble: {
       position: 'bottom-right',
-      customIcon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8" /><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 2v2" /><path d="M9 2v2" /></svg>`
+      customIcon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v0A2.5 2.5 0 0 1 9.5 7v0A2.5 2.5 0 0 1 7 9.5v0A2.5 2.5 0 0 1 4.5 12v0A2.5 2.5 0 0 1 7 14.5v0A2.5 2.5 0 0 1 9.5 17v0A2.5 2.5 0 0 1 12 19.5v0A2.5 2.5 0 0 1 14.5 17v0A2.5 2.5 0 0 1 17 14.5v0A2.5 2.5 0 0 1 19.5 12v0A2.5 2.5 0 0 1 17 9.5v0A2.5 2.5 0 0 1 14.5 7v0A2.5 2.5 0 0 1 12 4.5v0A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v0A2.5 2.5 0 0 0 14.5 7v0A2.5 2.5 0 0 0 17 9.5v0A2.5 2.5 0 0 0 19.5 12v0A2.5 2.5 0 0 0 17 14.5v0A2.5 2.5 0 0 0 14.5 17v0A2.5 2.5 0 0 0 12 19.5v0A2.5 2.5 0 0 0 9.5 17v0A2.5 2.5 0 0 0 7 14.5v0A2.5 2.5 0 0 0 4.5 12v0A2.5 2.5 0 0 0 7 9.5v0A2.5 2.5 0 0 0 9.5 7v0A2.5 2.5 0 0 0 12 4.5v0A2.5 2.5 0 0 0 14.5 2Z"/><path d="M12 12v10"/></svg>`
     }
   });
-
-  // Logika penyambung untuk tombol "Tanya AI Asisten" di menu Contact
-  const askAiButton = document.getElementById('ask-ai-button');
-  if (askAiButton) {
-    askAiButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      const n8nFloatingButton = document.querySelector('.chat-window-toggle');
-      if (n8nFloatingButton) n8nFloatingButton.click();
-    });
-  }
 </script>
+
 </body>
 </html>
