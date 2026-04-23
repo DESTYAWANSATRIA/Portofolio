@@ -825,63 +825,32 @@
   </div>
 </section>
 
-<footer style="padding-bottom: 4rem;">
-  <div style="margin-bottom: 2.5rem; text-align: center;">
-    <a href="#" id="ask-ai-button" class="btn-primary" style="display: inline-block; text-decoration: none;">Tanya AI Asisten</a>
-    <p style="font-size: .8rem; color: var(--text-muted); margin-top: 1rem;">Punya pertanyaan tentang proyek ini? Tanyakan pada asisten AI saya.</p>
-  </div>
-  <div style="font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--text-muted); text-align: center;">
-    © 2026 Destyawan S.N — Dibangun dengan memadukan kecerdasan buatan dan logika.
-  </div>
-<!-- ── FOOTER ── -->
 <footer>
   © 2026 Destyawan S.N — Dibangun dengan memadukan kecerdasan buatan dan logika.
 </footer>
 
-<script>
-  // Scroll reveal (Kode bawaan Kakak)
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  reveals.forEach(r => obs.observe(r));
-</script>
-
 <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-
 <script type="module">
-  // PERHATIKAN: Kita ambil JS dari CDN Publik (pakai .es.js) agar kebal CORS
+  // Menggunakan CDN untuk JS agar kebal CORS saat testing lokal
   import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
   createChat({
-    // Webhook URL TETAP mengarah ke server n8n Kakak
     webhookUrl: 'https://18rq2o.n8n.bocindonesia.com/webhook/c4742f5c-dc77-47a4-b1b9-fd41bd9669d2/chat',
     initialMessages: [
       'Halo! 👋 Saya adalah AI Asisten Destyawan.',
-      'Ada yang ingin Anda ketahui tentang pengalaman Desta di Machine Learning atau Generative AI?'
+      'Ada yang ingin Anda ketahui tentang proyek Nutri-Grade AI ini?'
     ],
-    i18n: {
-      en: { chatBox: { title: 'Tanya Desta AI', subtitle: 'Tanya seputar pengalaman & skill' } }
+    i18n: { en: { chatBox: { title: 'Tanya Desta AI', subtitle: 'Tanya seputar proyek ini' } } },
+    theme: { colors: { primary: '#00d4ff', accent: '#1a9eff', textLight: '#ffffff' } },
+    chatWindow: {
+      position: 'right',
     },
-    theme: {
-      colors: { primary: '#00d4ff', accent: '#1a9eff', textLight: '#ffffff' }
-    },
-    chatWindow: { position: 'right' },
     chatBubble: {
       position: 'bottom-right',
-      customIcon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8" /><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 2v2" /><path d="M9 2v2" /></svg>`
-    }
+      customIcon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v0A2.5 2.5 0 0 1 9.5 7v0A2.5 2.5 0 0 1 7 9.5v0A2.5 2.5 0 0 1 4.5 12v0A2.5 2.5 0 0 1 7 14.5v0A2.5 2.5 0 0 1 9.5 17v0A2.5 2.5 0 0 1 12 19.5v0A2.5 2.5 0 0 1 14.5 17v0A2.5 2.5 0 0 1 17 14.5v0A2.5 2.5 0 0 1 19.5 12v0A2.5 2.5 0 0 1 17 9.5v0A2.5 2.5 0 0 1 14.5 7v0A2.5 2.5 0 0 1 12 4.5v0A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v0A2.5 2.5 0 0 0 14.5 7v0A2.5 2.5 0 0 0 17 9.5v0A2.5 2.5 0 0 0 19.5 12v0A2.5 2.5 0 0 0 17 14.5v0A2.5 2.5 0 0 0 14.5 17v0A2.5 2.5 0 0 0 12 19.5v0A2.5 2.5 0 0 0 9.5 17v0A2.5 2.5 0 0 0 7 14.5v0A2.5 2.5 0 0 0 4.5 12v0A2.5 2.5 0 0 0 7 9.5v0A2.5 2.5 0 0 0 9.5 7v0A2.5 2.5 0 0 0 12 4.5v0A2.5 2.5 0 0 0 14.5 2Z"/><path d="M12 12v10"/></svg>`,
+    },
   });
-
-  // Logika penyambung untuk tombol "Tanya AI Asisten" di menu Contact
-  const askAiButton = document.getElementById('ask-ai-button');
-  if (askAiButton) {
-    askAiButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      const n8nFloatingButton = document.querySelector('.chat-window-toggle');
-      if (n8nFloatingButton) n8nFloatingButton.click();
-    });
-  }
 </script>
+
 </body>
 </html>
