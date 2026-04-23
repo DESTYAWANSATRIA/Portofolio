@@ -905,28 +905,14 @@ ketidaktahuan kita. Bila tidak tahu, maka carilah tahu."</p>
       'Halo! 👋 Saya adalah AI Asisten Destyawan.',
       'Ada yang ingin Anda ketahui tentang pengalaman Desta di Machine Learning atau Generative AI?'
     ],
-    i18n: {
-      en: { chatBox: { title: 'Tanya Desta AI', subtitle: 'Tanya seputar pengalaman & skill' } }
-    },
-    theme: {
-      colors: { primary: '#00d4ff', accent: '#1a9eff', textLight: '#ffffff' }
-    },
+    i18n: { en: { chatBox: { title: 'Tanya Desta AI', subtitle: 'Tanya seputar pengalaman & skill' } } },
+    theme: { colors: { primary: '#00d4ff', accent: '#1a9eff', textLight: '#ffffff' } },
     chatWindow: { position: 'right' },
     chatBubble: {
       position: 'bottom-right',
-      customIcon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8" /><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 2v2" /><path d="M9 2v2" /></svg>`
+      customIcon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v0A2.5 2.5 0 0 1 9.5 7v0A2.5 2.5 0 0 1 7 9.5v0A2.5 2.5 0 0 1 4.5 12v0A2.5 2.5 0 0 1 7 14.5v0A2.5 2.5 0 0 1 9.5 17v0A2.5 2.5 0 0 1 12 19.5v0A2.5 2.5 0 0 1 14.5 17v0A2.5 2.5 0 0 1 17 14.5v0A2.5 2.5 0 0 1 19.5 12v0A2.5 2.5 0 0 1 17 9.5v0A2.5 2.5 0 0 1 14.5 7v0A2.5 2.5 0 0 1 12 4.5v0A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v0A2.5 2.5 0 0 0 14.5 7v0A2.5 2.5 0 0 0 17 9.5v0A2.5 2.5 0 0 0 19.5 12v0A2.5 2.5 0 0 0 17 14.5v0A2.5 2.5 0 0 0 14.5 17v0A2.5 2.5 0 0 0 12 19.5v0A2.5 2.5 0 0 0 9.5 17v0A2.5 2.5 0 0 0 7 14.5v0A2.5 2.5 0 0 0 4.5 12v0A2.5 2.5 0 0 0 7 9.5v0A2.5 2.5 0 0 0 9.5 7v0A2.5 2.5 0 0 0 12 4.5v0A2.5 2.5 0 0 0 14.5 2Z"/><path d="M12 12v10"/></svg>`
     }
   });
-
-  // Logika penyambung untuk tombol "Tanya AI Asisten" di menu Contact
-  const askAiButton = document.getElementById('ask-ai-button');
-  if (askAiButton) {
-    askAiButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      const n8nFloatingButton = document.querySelector('.chat-window-toggle');
-      if (n8nFloatingButton) n8nFloatingButton.click();
-    });
-  }
 </script>
 </body>
 </html>
