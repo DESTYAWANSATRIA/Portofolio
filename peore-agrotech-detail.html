@@ -310,38 +310,55 @@ return $input.all();
   </div>
 </section>
 
+<!-- ── FOOTER ── -->
 <footer>
-  © 2026 Destyawan S.N — Mengorkestrasi AI dan Rekayasa Perangkat Lunak untuk Solusi Industri.
+  © 2026 Destyawan S.N — Dibangun dengan memadukan kecerdasan buatan dan logika.
 </footer>
 
-<link href="https://18rq2o-n8n.bocindonesia.com/chat/style.css" rel="stylesheet" />
-<script type="module">
-  import { createChat } from 'https://18rq2o-n8n.bocindonesia.com/chat/chat.bundle.js';
-
-  createChat({
-    webhookUrl: 'https://18rq2o-n8n.bocindonesia.com/webhook/7e8e304d-3de8-4a25-8a71-fa47a617f8b8/chat',
-    initialMessages: [
-      'Halo! 👋 Saya adalah AI Asisten Destyawan.',
-      'Ada yang ingin Anda ketahui tentang proyek Peore AgroTech ini?'
-    ],
-    i18n: {
-      en: {
-        chatBox: {
-          title: 'Tanya Desta AI',
-          subtitle: 'Tanya seputar proyek ini',
-        },
-      },
-    },
-    theme: { colors: { primary: '#00d4ff', accent: '#1a9eff', textLight: '#ffffff' } },
-    chatWindow: {
-      position: 'right',
-    },
-    chatBubble: {
-      position: 'bottom-right',
-      customIcon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8" /><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 2v2" /><path d="M9 2v2" /></svg>`,
-    },
-  });
+<script>
+  // Scroll reveal (Kode bawaan Kakak)
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => obs.observe(r));
 </script>
 
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+<script type="module">
+  // PERHATIKAN: Kita ambil JS dari CDN Publik (pakai .es.js) agar kebal CORS
+  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+  createChat({
+    // Webhook URL TETAP mengarah ke server n8n Kakak
+    webhookUrl: 'https://18rq2o.n8n.bocindonesia.com/webhook/c4742f5c-dc77-47a4-b1b9-fd41bd9669d2/chat',
+    initialMessages: [
+      'Halo! 👋 Saya adalah AI Asisten Destyawan.',
+      'Ada yang ingin Anda ketahui tentang pengalaman Desta di Machine Learning atau Generative AI?'
+    ],
+    i18n: {
+      en: { chatBox: { title: 'Tanya Desta AI', subtitle: 'Tanya seputar pengalaman & skill' } }
+    },
+    theme: {
+      colors: { primary: '#00d4ff', accent: '#1a9eff', textLight: '#ffffff' }
+    },
+    chatWindow: { position: 'right' },
+    chatBubble: {
+      position: 'bottom-right',
+      customIcon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8" /><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 2v2" /><path d="M9 2v2" /></svg>`
+    }
+  });
+
+  // Logika penyambung untuk tombol "Tanya AI Asisten" di menu Contact
+  const askAiButton = document.getElementById('ask-ai-button');
+  if (askAiButton) {
+    askAiButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      const n8nFloatingButton = document.querySelector('.chat-window-toggle');
+      if (n8nFloatingButton) n8nFloatingButton.click();
+    });
+  }
+</script>
 </body>
 </html>
