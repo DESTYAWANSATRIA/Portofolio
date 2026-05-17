@@ -173,6 +173,19 @@
       margin-top: 1.5rem;
     }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,212,255,0.5); }
+    .btn-outline {
+      display: inline-block;
+      padding: .75rem 2rem;
+      border: 1px solid var(--blue-bright);
+      color: var(--blue-bright);
+      text-decoration: none;
+      font-size: .85rem;
+      letter-spacing: 1px;
+      border-radius: 3px;
+      transition: background .2s, color .2s;
+      margin-top: 1.5rem;
+    }
+    .btn-outline:hover { background: var(--blue-bright); color: var(--navy); }
     .back-link {
       display: inline-block;
       margin-top: 4rem;
@@ -817,8 +830,9 @@
       </div>
     </div>
 
-    <div style="text-align: center; margin-top: 2rem;">
-      <a href="https://huggingface.co/spaces/destyawan/nutri-grade-ai" class="btn-primary">Coba Live Demo (Hugging Face Spaces)</a>
+    <div style="text-align: center; margin-top: 2rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+      <a href="https://huggingface.co/spaces/destyawan/nutri-grade-ai" target="_blank" class="btn-primary">Coba Live Demo</a>
+      <a href="https://github.com/DESTYAWANSATRIA/Nutri-Grade-AI-System" target="_blank" class="btn-outline">Lihat di GitHub</a>
     </div>
 
     <a href="index.html#projects" class="back-link">← Kembali ke Daftar Project</a>
